@@ -25,16 +25,16 @@ const App = () => {
   const [currency, setCurrency] = useState<string>('USD');
   const { data, isLoading, error, refetch } = useQuery<Currencies>('bc-data', getBCData);
 
-  console.log(data);
-
-  const handleCurrencySelection = (e: any) => {
-    setCurrency(e.currentTarget.value)
-  }
-
   useEffect(() => {
     const interval = setInterval(refetch, INTERVAL_TIME);
     return () => clearInterval(interval);
   }, [refetch])
+
+  console.log("referching...");
+
+  const handleCurrencySelection = (e: any) => {
+    setCurrency(e.currentTarget.value)
+  }
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Something went wrong.</div>
