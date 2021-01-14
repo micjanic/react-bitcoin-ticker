@@ -24,6 +24,9 @@ const INTERVAL_TIME = 30000; // 30s
 const App = () => {
   const { data, isLoading, error, refetch } = useQuery<Currencies>('bc-data', getBCData);
   console.log(data);
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Something went wrong.</div>
   return (
     <div className="App">start
     </div>
