@@ -11,7 +11,11 @@ type BitcoinData = {
   symbol: string;
 }
 
-const getBCData = async () => {
+type Currencies = {
+  [key: string]: BitcoinData
+}
+
+const getBCData = async (): Promise<Currencies> => {
   await (await fetch('https://blockchain.info/ticker')).json();
 }
 
