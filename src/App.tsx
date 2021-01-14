@@ -12,7 +12,7 @@ type BitcoinData = {
 }
 
 type Currencies = {
-  (k: string): BitcoinData
+  [key: string]: BitcoinData
 }
 
 const getBCData = async (): Promise<Currencies> => {
@@ -22,7 +22,7 @@ const getBCData = async (): Promise<Currencies> => {
 const INTERVAL_TIME = 30000; // 30s
 
 const App = () => {
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState<string>('USD');
   const { data, isLoading, error, refetch } = useQuery<Currencies>('bc-data', getBCData);
 
   console.log(data);
