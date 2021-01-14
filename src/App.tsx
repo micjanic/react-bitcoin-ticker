@@ -19,7 +19,7 @@ const getBCData = async (): Promise<Currencies> => {
   return await (await fetch('https://blockchain.info/ticker')).json();
 }
 
-const INTERVAL_TIME = 30000; // 30s
+const INTERVAL_TIME = 2000; // 30s
 
 const App = () => {
   const [currency, setCurrency] = useState<string>('USD');
@@ -30,6 +30,11 @@ const App = () => {
   const handleCurrencySelection = (e: any) => {
     setCurrency(e.currentTarget.value)
   }
+
+  useEffect(() => {
+    const interval = setInterval(refetch, INTERVAL_TIME);
+    return () => clearInterval(interval);
+  }, [refetch])
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Something went wrong.</div>
